@@ -140,7 +140,7 @@ namespace kittybot {
         ],
     ]
 
-    enum action_name {
+    export enum action_name {
         walk = 0,
         walk_backward = 1,
         turn_left = 2,
@@ -254,10 +254,7 @@ namespace kittybot {
             speedFactor = speed % 100
         }
 
-        //debug_print_arr("target", target)
-        //debug_print_arr("beginning", beginning)
-
-        for (let l = 0; l < delta.length; l++) {
+         for (let l = 0; l < delta.length; l++) {
             delta[l] = offset[l] + target[l] - position[l]
             let temp = Math.abs(delta[l])
             if (temp > delta_max)
@@ -289,7 +286,7 @@ namespace kittybot {
         }
     }
 
-    function servo_rel_speed2(target: number[], speed: number) {
+    function servo_rel_speed2x(target: number[], speed: number) {
         let delta = [0, 0, 0, 0]
         let delta_max = 0
         let beginning = [position[0], position[1], position[2], position[3]]
