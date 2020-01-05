@@ -176,8 +176,14 @@ namespace kittybot {
      */
     //% blockId=kittybot_do_action block="%action=kittybot_actions|%step|step in %speed|speed"
     //% weight=98 blockGap=50
-    //% speed.min=1 speed.max=100
+    //% speed.min=-1000 
+    //% speed.max=100
     export function do_action(action: number, step: number = 1, speed: number = 50): void {
+        if (speed > 100)
+            speed = 100
+        if (step < 1)
+            step = 1 
+               
         for (let i = 0; i < step; i++) {
             for (let data of action_data[action]) {
                 servo_rel_speed(transform(data), speed);
