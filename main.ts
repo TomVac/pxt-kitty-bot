@@ -246,11 +246,11 @@ namespace kittybot {
         let delta = [0, 0, 0, 0]
         let delta_max = 0
         let beginning = [position[0], position[1], position[2], position[3]]
-        let speedFactor = 0
+        let speedFactor = 1
 
         // speed reduction
-        if (speed > 100) {
-            speed = 100
+        if (speed >= 200) {
+            speed = 199
             speedFactor = speed % 100
         }
 
@@ -263,23 +263,29 @@ namespace kittybot {
             if (temp > delta_max)
                 delta_max = temp
         }
-
-        delta_max -= speedFactor
-
+        
         if (delta_max <= 0)
             delta_max = 1
 
-        //debug_print_arr("delta", delta)
-
-        for (let m = 0; m <= delta_max; m++) {
+        //for (let m = 0; m <= delta_max; m+=speedFactor) {
+        let m =0
+        while(true) {  
             for (let idx = 0; idx < 4; idx++) {
                 position[idx] = Math.round(beginning[idx] + (delta[idx] * m) / delta_max)
                 robotbit.Servo(idx + 1, position[idx])
             }
-            //debug_print_arr("position " + m.toString(), position)
-            //control.waitMicros((100 - speed) * 10)
-            // pause = (100 - speed) * (MAX_us/100)
-            control.waitMicros((100 - speed) * 160)
+            // finish condition
+            if (m >= delta_max)
+                break
+   
+            //  delay = (100 - speed) * (MAX_us/100)
+            let delay = (100 - speed) * 160
+            if (delay > 0)
+                control.waitMicros(delay)
+
+            m += speedFactor
+            if (m>delta_max)
+                m = delta_max
         }
     }
 
