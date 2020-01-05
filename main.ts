@@ -1,7 +1,7 @@
 /**
  * kittybot blocks
  */
-//% weight=100 color=#0fbc11 icon="\uf6be"
+//% weight=100 color=#0fbc11 icon="paw"
 namespace kittybot {
 
     let action_data = [
@@ -188,12 +188,12 @@ namespace kittybot {
     /**
      * Set offset for 4 servos: you can use block "calibrate" on "startup", to get the value to fill in the blank
      */
-    //% blockId=kittybot_set_offset block="set offset Left Leg %o1| Left Foot %o2| Right Leg %o3|  Right Foot %o4"
+    //% blockId=kittybot_set_offset block="set offset| Left Leg %o1| Left Foot %o2| Right Leg %o3| Right Foot %o4"
     //% weight=45
-    //% o1.min=0 o1.max=180
-    //% o2.min=0 o2.max=180
-    //% o3.min=0 o3.max=180
-    //% o4.min=0 o4.max=180
+    //% o1.min=0 o1.max=180 o1.shadow="protractorPicker"
+    //% o2.min=0 o2.max=180 o2.shadow="protractorPicker"
+    //% o3.min=0 o3.max=180 o3.shadow="protractorPicker"
+    //% o4.min=0 o4.max=180 o4.shadow="protractorPicker"
     export function set_offset(o1: number, o2: number, o3: number, o4: number): void {
         offset = [o1, o2, o3, o4]
     }
