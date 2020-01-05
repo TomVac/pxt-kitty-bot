@@ -140,7 +140,7 @@ namespace kittybot {
         ],
     ]
 
-    export enum action_name {
+    enum action_name {
         walk = 0,
         walk_backward = 1,
         turn_left = 2,
@@ -174,7 +174,7 @@ namespace kittybot {
      * @param step ; eg: 1
      * @param speed ; eg: 50
      */
-    //% blockId=kittybot_do_action block="%action=kittybot_actions|%step|step in %speed|speed"
+    //% blockId=kittybot_do_action block="%action=kittybot_actions|%step|step in %speed|\\% speed"
     //% weight=98 blockGap=50
     //% speed.min=1 
     //% speed.max=100
@@ -182,8 +182,8 @@ namespace kittybot {
         if (speed > 200)
             speed = 200
         if (step < 1)
-            step = 1 
-               
+            step = 1
+
         for (let i = 0; i < step; i++) {
             for (let data of action_data[action]) {
                 servo_rel_speed(transform(data), speed);
@@ -247,9 +247,9 @@ namespace kittybot {
         let delta_max = 0
         let beginning = [position[0], position[1], position[2], position[3]]
         let speedFactor = 0
-        
+
         // speed reduction
-        if (speed>100) {
+        if (speed > 100) {
             speed = 100
             speedFactor = speed % 100
         }
@@ -263,7 +263,7 @@ namespace kittybot {
             if (temp > delta_max)
                 delta_max = temp
         }
-        
+
         delta_max -= speedFactor
 
         if (delta_max <= 0)
