@@ -1,7 +1,7 @@
 /**
  * kittybot blocks
  */
-//% weight=100 color=#0fbc11 icon="\uf6be" 
+//% weight=100 color=#0fbc11 icon="\uf0a4" 
 namespace kittybot {
 
     let action_data = [
