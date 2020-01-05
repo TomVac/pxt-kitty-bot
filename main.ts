@@ -286,7 +286,7 @@ namespace kittybot {
         }
     }
 
-    function servo_rel_speed2x(target: number[], speed: number) {
+    function servo_rel_speed2(target: number[], speed: number) {
         let delta = [0, 0, 0, 0]
         let delta_max = 0
         let beginning = [position[0], position[1], position[2], position[3]]
