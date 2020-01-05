@@ -176,11 +176,11 @@ namespace kittybot {
      */
     //% blockId=kittybot_do_action block="%action=kittybot_actions|%step|step in %speed|speed"
     //% weight=98 blockGap=50
-    //% speed.min=-1000 
+    //% speed.min=1 
     //% speed.max=100
     export function do_action(action: number, step: number = 1, speed: number = 50): void {
-        if (speed > 100)
-            speed = 100
+        if (speed > 200)
+            speed = 200
         if (step < 1)
             step = 1 
                
@@ -246,6 +246,14 @@ namespace kittybot {
         let delta = [0, 0, 0, 0]
         let delta_max = 0
         let beginning = [position[0], position[1], position[2], position[3]]
+        let speedFactor = 0
+        
+        // speed reduction
+        if (speed>100) {
+            speed = 100
+            speedFactor = speed % 100
+        }
+
         //debug_print_arr("target", target)
         //debug_print_arr("beginning", beginning)
 
@@ -255,6 +263,9 @@ namespace kittybot {
             if (temp > delta_max)
                 delta_max = temp
         }
+        
+        delta_max -= speedFactor
+
         if (delta_max <= 0)
             delta_max = 1
 
@@ -266,7 +277,9 @@ namespace kittybot {
                 robotbit.Servo(idx + 1, position[idx])
             }
             //debug_print_arr("position " + m.toString(), position)
-            control.waitMicros((100 - speed) * 10)
+            //control.waitMicros((100 - speed) * 10)
+            // pause = (100 - speed) * (MAX_us/100)
+            control.waitMicros((100 - speed) * 160)
         }
     }
 
